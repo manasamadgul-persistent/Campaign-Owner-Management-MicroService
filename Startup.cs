@@ -39,7 +39,7 @@ namespace CampaignMgmt
             services.AddSingleton<IOwnerDBSettings>(sp =>
                 sp.GetRequiredService<IOptions<OwnerDBSettings>>().Value);
 
-            services.AddSingleton<IOwnerRepository,OwnerRepository>();
+            services.AddSingleton(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

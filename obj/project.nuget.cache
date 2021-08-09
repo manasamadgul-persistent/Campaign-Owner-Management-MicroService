@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YmfwOpi6//lXPyPxxYibO5Diaxuf17Ti4Bu/4T+Ht4gZCOtt4bz7/i+8fn2/vOj8shQ0h080TKDUWdSju6uhtQ==",
+  "dgSpecHash": "p4Y92Q8EH76d2iswG39MfMGxIynQHwO5dO9k1sE6dRhb2mHboqtNPb77ztTOc3iphYKWep3ztb+Pcsv/CTs4Pw==",
   "success": true,
-  "projectFilePath": "D:\\netcore Projects\\CampaignMgmt\\CampaignMgmt.csproj",
+  "projectFilePath": "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dipali_kumbhar\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\dipali_kumbhar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\netcore Projects\\CampaignMgmt\\CampaignMgmt.csproj": {}
+    "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj": {}
   },
   "projects": {
-    "D:\\netcore Projects\\CampaignMgmt\\CampaignMgmt.csproj": {
+    "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\netcore Projects\\CampaignMgmt\\CampaignMgmt.csproj",
+        "projectUniqueName": "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj",
         "projectName": "CampaignMgmt",
-        "projectPath": "D:\\netcore Projects\\CampaignMgmt\\CampaignMgmt.csproj",
+        "projectPath": "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj",
         "packagesPath": "C:\\Users\\dipali_kumbhar\\.nuget\\packages\\",
-        "outputPath": "D:\\netcore Projects\\CampaignMgmt\\obj\\",
+        "outputPath": "D:\\netcoreProjects\\CampaignMgmt\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

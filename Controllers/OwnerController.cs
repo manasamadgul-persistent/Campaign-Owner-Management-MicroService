@@ -17,9 +17,9 @@ namespace CampaignMgmt.Controllers
     [ApiController]
     public class OwnerController : ControllerBase
     {
-        private readonly IOwnerRepository _ownerRepository;
+        private readonly IRepository<Owner> _ownerRepository;
         private readonly ILogger _logger;
-        public OwnerController(IOwnerRepository ownerRepository, ILogger<OwnerController> logger)
+        public OwnerController(IRepository<Owner> ownerRepository, ILogger<OwnerController> logger)
         {
             _ownerRepository = ownerRepository;
             _logger = logger;
@@ -27,11 +27,11 @@ namespace CampaignMgmt.Controllers
 
         // GET: api/<OwnerController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<IEnumerable<Owner>>> Get()
         {
             try
             {
-                var owner = _ownerRepository.GetOwner();
+                var owner = await _ownerRepository.GetAll();
                 return new OkObjectResult(owner);
             }
             catch (Exception ex)
@@ -44,12 +44,12 @@ namespace CampaignMgmt.Controllers
 
         // GET api/<OwnerController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> GetAsync(string id)
         {
             try
             {
-                var user = _ownerRepository.GetOwnerById(id);
-                return new OkObjectResult(user);
+                var owner = await _ownerRepository.Get(id);
+                return new OkObjectResult(owner);
             }
             catch (Exception ex)
             {
@@ -60,11 +60,11 @@ namespace CampaignMgmt.Controllers
 
         // POST api/<OwnerController>
         [HttpPost]
-        public IActionResult Post([FromBody] Owner owner)
+        public async Task<IActionResult> PostAsync([FromBody] Owner owner)
         {
             try
             {
-                _ownerRepository.InsertOwner(owner);
+                await _ownerRepository.Add(owner);
                 return StatusCode(StatusCodes.Status201Created, owner);
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace CampaignMgmt.Controllers
             {
                 if (owner != null)
                 {
-                    _ownerRepository.UpdateOwner(id,owner);
+                    _ownerRepository.Update(owner);
                 }
                 return StatusCode(StatusCodes.Status200OK, owner);
             }
@@ -95,11 +95,11 @@ namespace CampaignMgmt.Controllers
 
         // DELETE api/<OwnerController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             try
             {
-                _ownerRepository.DeleteOwner(id);
+                _ownerRepository.Delete(id);
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
