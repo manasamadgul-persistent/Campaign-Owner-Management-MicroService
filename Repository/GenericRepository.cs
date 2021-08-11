@@ -11,10 +11,12 @@ namespace CampaignMgmt.Repository
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity:IEntity
     {
         private readonly IMongoCollection<TEntity> _dbCollection;
-        public GenericRepository(IOwnerDBSettings settings)
+        protected readonly string key;
+        public GenericRepository(IOwnerDBSettings settings,IJWTTokenKey tokenKey)
         {
             var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
             _dbCollection = database.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
+            key = tokenKey.JwtKey;
         }
         private protected string GetCollectionName(Type type)
         {
