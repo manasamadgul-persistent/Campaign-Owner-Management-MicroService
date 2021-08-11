@@ -17,7 +17,9 @@ using CampaignMgmt.Models;
 using Microsoft.Extensions.Options;
 using CampaignMgmt.Repository;
 using CampaignMgmt.Extensions;
-
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CampaignMgmt
 {
@@ -33,14 +35,41 @@ namespace CampaignMgmt
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.Configure<OwnerDBSettings>(
-                Configuration.GetSection(nameof(OwnerDBSettings))
-                );
+                Configuration.GetSection(nameof(OwnerDBSettings)));
+
             services.AddSingleton<IOwnerDBSettings>(sp =>
                 sp.GetRequiredService<IOptions<OwnerDBSettings>>().Value);
 
+            services.Configure<JWTTokenKey>(
+                Configuration.GetSection(nameof(JWTTokenKey)));
+
+            services.AddSingleton<IJWTTokenKey>(sp =>
+                sp.GetRequiredService<IOptions<JWTTokenKey>>().Value);
+
             services.AddSingleton(typeof(IRepository<>), typeof(GenericRepository<>));
-            services.AddControllers();
+            services.AddTransient(typeof(ILoginRepository), typeof(LoginRepository));
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(
+                    x =>
+                    {
+                        x.RequireHttpsMetadata = false;
+                        x.SaveToken = true;
+                        x.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection(nameof(JWTTokenKey)).ToString())),
+                            ValidateIssuer = false,
+                            ValidateAudience = false
+                        };
+                    });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CampaignMgmt", Version = "v1" });
