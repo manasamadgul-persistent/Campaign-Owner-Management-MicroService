@@ -17,9 +17,9 @@ namespace CampaignMgmt.Controllers
     [ApiController]
     public class OwnerController : ControllerBase
     {
-        private readonly IRepository<Owner> _ownerRepository;
+        private readonly IOwnerRepository _ownerRepository;
         private readonly ILogger _logger;
-        public OwnerController(IRepository<Owner> ownerRepository, ILogger<OwnerController> logger)
+        public OwnerController(IOwnerRepository ownerRepository, ILogger<OwnerController> logger)
         {
             _ownerRepository = ownerRepository;
             _logger = logger;

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj": {}
+    "D:\\netcoreProjects\\Campaign-Owner-Management-MicroService\\CampaignMgmt.csproj": {}
   },
   "projects": {
-    "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj": {
+    "D:\\netcoreProjects\\Campaign-Owner-Management-MicroService\\CampaignMgmt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj",
+        "projectUniqueName": "D:\\netcoreProjects\\Campaign-Owner-Management-MicroService\\CampaignMgmt.csproj",
         "projectName": "CampaignMgmt",
-        "projectPath": "D:\\netcoreProjects\\CampaignMgmt\\CampaignMgmt.csproj",
+        "projectPath": "D:\\netcoreProjects\\Campaign-Owner-Management-MicroService\\CampaignMgmt.csproj",
         "packagesPath": "C:\\Users\\dipali_kumbhar\\.nuget\\packages\\",
-        "outputPath": "D:\\netcoreProjects\\CampaignMgmt\\obj\\",
+        "outputPath": "D:\\netcoreProjects\\Campaign-Owner-Management-MicroService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.8, )"

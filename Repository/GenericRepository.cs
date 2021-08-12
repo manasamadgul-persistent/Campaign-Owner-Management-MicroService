@@ -1,4 +1,5 @@
-﻿using CampaignMgmt.Models;
+﻿using CampaignMgmt.DbContext;
+using CampaignMgmt.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -10,19 +11,29 @@ namespace CampaignMgmt.Repository
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity:IEntity
     {
-        private readonly IMongoCollection<TEntity> _dbCollection;
-        public GenericRepository(IOwnerDBSettings settings)
+        protected readonly IMongoDBContext<TEntity> _mongoContext;
+        protected IMongoCollection<TEntity> _dbCollection;
+        
+        protected GenericRepository(IMongoDBContext<TEntity> context)
         {
-            var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
-            _dbCollection = database.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
+            _mongoContext = context;
+            _dbCollection = _mongoContext.GetCollection<TEntity>(typeof(TEntity).Name);
+            
         }
-        private protected string GetCollectionName(Type type)
-        {
-            return ((BsonCollectionAttribute)type.GetCustomAttributes(
-                typeof(BsonCollectionAttribute),
-                true)
-            .FirstOrDefault())?.CollectionName;
-        }
+
+        //private readonly IMongoCollection<TEntity> _dbCollection;
+        //public GenericRepository(IOwnerDBSettings settings)
+        //{
+        //    var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
+        //    _dbCollection = database.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
+        //}
+        //private protected string GetCollectionName(Type type)
+        //{
+        //    return ((BsonCollectionAttribute)type.GetCustomAttributes(
+        //        typeof(BsonCollectionAttribute),
+        //        true)
+        //    .FirstOrDefault())?.CollectionName;
+        //}
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
